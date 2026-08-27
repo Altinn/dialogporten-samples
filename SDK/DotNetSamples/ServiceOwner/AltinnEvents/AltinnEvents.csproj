@@ -9,7 +9,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Altinn.ApiClients.Dialogporten.ServiceOwner" Version="1.117.1-alpha.1781004626" />
+        <PackageReference Include="Altinn.ApiClients.Dialogporten.ServiceOwner" Version="1.119.1-alpha.1787826357" />
         <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.8" />
     </ItemGroup>
 </Project>

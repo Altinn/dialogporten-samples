@@ -1,6 +1,8 @@
 ﻿using Altinn.ApiClients.Dialogporten;
 using Altinn.ApiClients.Dialogporten.ServiceOwner;
-using Altinn.ApiClients.Dialogporten.ServiceOwner.Features.V1;
+using Altinn.ApiClients.Dialogporten.ServiceOwner.Features.V1.Common;
+using Altinn.ApiClients.Dialogporten.ServiceOwner.Features.V1.Create;
+using Altinn.ApiClients.Dialogporten.ServiceOwner.Features.V1.Enums;
 using AltinnEvents;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
@@ -85,7 +87,8 @@ async Task CreatedHandler(IServiceOwnerApi serviceOwnerApi, CloudEvent cloudEven
                 Value = "Dialog er laget",
                 LanguageCode = "nb"
             }
-        ]
+        ],
+        PerformedBy = new Actor() // Trenger vi at denne er required?
     };
     var createActivityResponse = await serviceOwnerApi.V1.CreateDialogActivity(id, req, dialog.Revision, cancellationToken);
     Console.WriteLine($" Create activity statusCode: {createActivityResponse.StatusCode}");
