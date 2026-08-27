@@ -1,6 +1,10 @@
 <Solution>
-  <Project Path="EndUser/GetCorrespondence/GetCorrespondence.csproj" />
-  <Project Path="EndUser/SearchDialog/SearchDialog.csproj" />
-  <Project Path="ServiceOwner/AltinnEvents/AltinnEvents.csproj" />
-  <Project Path="EndUser/SetSystemLabel/SetSystemLabel.csproj" />
+    <Folder Name="/Enduser/">
+        <Project Path="EndUser/GetCorrespondence/GetCorrespondence.csproj"/>
+        <Project Path="EndUser/SearchDialog/SearchDialog.csproj"/>
+        <Project Path="EndUser/SetSystemLabel/SetSystemLabel.csproj"/>
+    </Folder>
+    <Folder Name="/ServiceOwner/">
+        <Project Path="ServiceOwner/AltinnEvents/AltinnEvents.csproj"/>
+    </Folder>
 </Solution>
