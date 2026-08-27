@@ -31,12 +31,6 @@ app.MapPost("/event", async (
         CancellationToken cancellationToken)
     =>
 {
-#if DEBUG
-    foreach (var propertyInfo in cloudEvent.GetType().GetProperties())
-    {
-        Console.WriteLine($"{propertyInfo.Name}: {propertyInfo.GetValue(cloudEvent)}");
-    }
-#endif //DEBUG
     switch (cloudEvent.Type)
     {
         case "dialogporten.dialog.created.v1":
@@ -69,7 +63,7 @@ async Task CreatedHandler(IServiceOwnerApi serviceOwnerApi, CloudEvent cloudEven
     {
         throw new InvalidCastException(cloudEvent.ResourceInstance);
     }
-    var getDialogResponse = await serviceOwnerApi.V1.GetDialog(id, null!, cancellationToken);
+    var getDialogResponse = await serviceOwnerApi.V1.GetDialog(id, cancellationToken: cancellationToken);
     Console.WriteLine($"StatusCode: {getDialogResponse.StatusCode}");
     var dialog = getDialogResponse.Content;
     if (!getDialogResponse.IsSuccessStatusCode || dialog is null)
@@ -84,8 +78,8 @@ async Task CreatedHandler(IServiceOwnerApi serviceOwnerApi, CloudEvent cloudEven
         [
             new()
             {
-                Value = "Dialog er laget",
-                LanguageCode = "nb"
+                Value = "Dialog created",
+                LanguageCode = "en"
             }
         ],
         PerformedBy = new Actor() // Trenger vi at denne er required?
