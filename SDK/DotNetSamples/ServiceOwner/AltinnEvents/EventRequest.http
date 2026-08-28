@@ -1,0 +1,40 @@
+### POST Validate Subs
+POST http://localhost:5000/event
+Content-Type: application/json
+
+{
+  "id": "694caa35-8b25-4cd7-b800-f6eeb93c56ed",
+  "source": "https://platform.altinn.no/events/api/v1/subscriptions/1234",
+  "type": "platform.events.validatesubscription",
+  "specversion": "1.0"
+}
+
+### POST Created event
+POST http://localhost:5000/event
+Content-Type: application/json
+
+{
+  "specversion": "1.0",
+  "id": "a4f4e30d-564e-4e36-b111-41e08238ebce",
+  "time": "2026-03-16T11:43:32.4136593Z",
+  "type": "dialogporten.dialog.created.v1",
+  "source": "https://platform.tt02.altinn.no/dialogporten/api/v1/enduser/dialogs/019ebbb5-ac51-75ab-a98b-786e3581350e",
+  "subject": "urn:altinn:person:identifier-no:23905497111",
+  "resource": "urn:altinn:resource:super-simple-service",
+  "resourceinstance": "019ebbb5-ac51-75ab-a98b-786e3581350e"
+}
+
+### POST Update event
+POST http://localhost:5000/event
+Content-Type: application/json
+
+{
+  "specversion": "1.0",
+  "id": "b16158b0-323d-4ff8-8d2d-d124766e213e",
+  "time": "2026-03-16T12:21:21.8223289Z",
+  "type": "dialogporten.dialog.updated.v1",
+  "source": "https://platform.tt02.altinn.no/dialogporten/api/v1/enduser/dialogs/019ebbb5-ac51-75ab-a98b-786e3581350e",
+  "subject": "urn:altinn:person:identifier-no:23905497111",
+  "resource": "urn:altinn:resource:super-simple-service",
+  "resourceinstance": "019ebbb5-ac51-75ab-a98b-786e3581350e"
+}

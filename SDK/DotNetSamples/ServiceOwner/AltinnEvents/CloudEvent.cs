@@ -1,0 +1,15 @@
+namespace AltinnEvents;
+
+public sealed class CloudEvent
+{
+    public string SpecVersion { get; set; }
+    public Guid Id { get; set; }
+    public string Type { get; set; } = null!;
+    public DateTimeOffset Time { get; set; }
+    public string Resource { get; set; } = null!;
+    public string ResourceInstance { get; set; } = null!;
+    public string? Subject { get; set; }
+    public string? AlternativeSubject { get; set; }
+    public string Source { get; set; } = null!;
+    public Dictionary<string, object>? Data { get; set; }
+}
