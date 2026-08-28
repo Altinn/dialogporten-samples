@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <TargetFramework>net10.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <UserSecretsId>f36ad595-de72-428a-94c7-f16adb1dce6f</UserSecretsId>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Altinn.ApiClients.Dialogporten.ServiceOwner" Version="1.119.1-alpha.1787826357" />
+      <PackageReference Include="Microsoft.Extensions.Hosting" Version="10.0.10" />
+    </ItemGroup>
+
+</Project>
