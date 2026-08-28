@@ -95,7 +95,7 @@ async Task UpdateHandler(CloudEvent cloudEvent, IServiceOwnerApi serviceOwnerApi
     {
         throw new InvalidCastException(cloudEvent.ResourceInstance);
     }
-    var getDialogResponse = await serviceOwnerApi.V1.GetDialog(id, null!, cancellationToken);
+    var getDialogResponse = await serviceOwnerApi.V1.GetDialog(id, cancellationToken: cancellationToken);
     Console.WriteLine($"StatusCode: {getDialogResponse.StatusCode}");
     var dialog = getDialogResponse.Content;
     if (!getDialogResponse.IsSuccessStatusCode || dialog is null)
