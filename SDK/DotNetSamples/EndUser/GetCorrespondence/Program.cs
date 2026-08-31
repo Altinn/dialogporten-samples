@@ -58,7 +58,7 @@ internal class Program
         }
 
         // Print out all the apiActions in the dialog
-        if (dialog.Content.ApiActions == null)
+        if (dialog.Content.ApiActions.Count == 0)
         {
             await Console.Error.WriteLineAsync("No API actions defined");
             return 1;
@@ -69,7 +69,6 @@ internal class Program
             Console.WriteLine($"\nAction ID: {action.Id}");
             Console.WriteLine($"Action name: {(string.IsNullOrEmpty(action.Name) ? "No name" : action.Name)}");
             Console.WriteLine($"Action type: {action.Action}");
-            if (action.Endpoints == null) continue;
 
             foreach (var endpoint in action.Endpoints)
             {
