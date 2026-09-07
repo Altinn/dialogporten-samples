@@ -68,8 +68,6 @@ public class CreateDialogDtoSamples
             Process = "urn:altinn:process:byggesak",
             PrecedingProcess = "urn:altinn:process:forhaandskonferanse",
             IsApiOnly = false,
-            CreatedAt = now.AddDays(-14),
-            UpdatedAt = now.AddDays(-2),
             DueAt = now.AddDays(14),
             ExpiresAt = now.AddYears(1),
 
@@ -234,7 +232,6 @@ public class CreateDialogDtoSamples
                 new CreateDialogTransmission
                 {
                     Id = requestTransmissionId,
-                    CreatedAt = now.AddDays(-5),
                     Type = DialogTransmissionType.Request,
                     ExtendedType = new Uri("urn:altinn:transmission:mangelbrev"),
                     ExternalReference = "BREV-2026-0042-01",
@@ -298,7 +295,6 @@ public class CreateDialogDtoSamples
                 new CreateDialogTransmission
                 {
                     Id = submissionTransmissionId,
-                    CreatedAt = now.AddDays(-2),
                     Type = DialogTransmissionType.Submission,
                     // Ties the answer back to the request it replies to.
                     RelatedTransmissionId = requestTransmissionId,
@@ -460,8 +456,7 @@ public class CreateDialogDtoSamples
             [
                 new CreateDialogActivity
                 {
-                    Id = Guid.CreateVersion7(now.AddDays(-5)),
-                    CreatedAt = now.AddDays(-5),
+                    Id = Guid.CreateVersion7(),
                     Type = DialogActivityType.Information,
                     PerformedBy = new Actor { ActorType = ActorType.ServiceOwner },
                     // Description is only allowed for the "Information" activity type.
@@ -473,8 +468,7 @@ public class CreateDialogDtoSamples
                 },
                 new CreateDialogActivity
                 {
-                    Id = Guid.CreateVersion7(now.AddDays(-2)),
-                    CreatedAt = now.AddDays(-2),
+                    Id = Guid.CreateVersion7(),
                     Type = DialogActivityType.FormSubmitted,
                     ExtendedType = new Uri("urn:altinn:activity:tilleggsdokumentasjon"),
                     PerformedBy = new Actor
