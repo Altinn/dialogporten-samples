@@ -35,7 +35,6 @@ public class CreateDialogDtoSamples
                 }
             }
         };
-
     }
 
     /// <summary>
@@ -89,6 +88,7 @@ public class CreateDialogDtoSamples
                     Value =
                     [
                         new Localization { LanguageCode = "nb", Value = "Byggesøknad for Storgata 1" },
+                        new Localization { LanguageCode = "nn", Value = "Byggjesøknad for Storgata 1" },
                         new Localization { LanguageCode = "en", Value = "Building permit application for Storgata 1" }
                     ]
                 },
@@ -100,6 +100,7 @@ public class CreateDialogDtoSamples
                     Value =
                     [
                         new Localization { LanguageCode = "nb", Value = "Byggesøknad" },
+                        new Localization { LanguageCode = "nn", Value = "Byggjesøknad" },
                         new Localization { LanguageCode = "en", Value = "Building permit application" }
                     ]
                 },
@@ -109,6 +110,7 @@ public class CreateDialogDtoSamples
                     Value =
                     [
                         new Localization { LanguageCode = "nb", Value = "Søknaden er under behandling. Vi mangler oppdaterte situasjonsplaner fra deg." },
+                        new Localization { LanguageCode = "nn", Value = "Søknaden er under behandling. Vi manglar oppdaterte situasjonsplanar frå deg." },
                         new Localization { LanguageCode = "en", Value = "The application is being processed. We are missing updated site plans from you." }
                     ]
                 },
@@ -118,6 +120,7 @@ public class CreateDialogDtoSamples
                     Value =
                     [
                         new Localization { LanguageCode = "nb", Value = "Saken din er under behandling." },
+                        new Localization { LanguageCode = "nn", Value = "Saka di er under behandling." },
                         new Localization { LanguageCode = "en", Value = "Your case is being processed." }
                     ]
                 },
@@ -127,6 +130,7 @@ public class CreateDialogDtoSamples
                     Value =
                     [
                         new Localization { LanguageCode = "nb", Value = "Plan- og bygningsetaten" },
+                        new Localization { LanguageCode = "nn", Value = "Plan- og bygningsetaten" },
                         new Localization { LanguageCode = "en", Value = "Planning and Building Services" }
                     ]
                 },
@@ -142,6 +146,11 @@ public class CreateDialogDtoSamples
                         },
                         new Localization
                         {
+                            LanguageCode = "nn",
+                            Value = "## Kva skjer no?\n\n1. Vi går gjennom dokumentasjonen\n2. Naboar blir varsla\n3. Vedtak blir gjort innan 12 veker"
+                        },
+                        new Localization
+                        {
                             LanguageCode = "en",
                             Value = "## What happens next?\n\n1. We review the documentation\n2. Neighbours are notified\n3. A decision is made within 12 weeks"
                         }
@@ -154,6 +163,7 @@ public class CreateDialogDtoSamples
                     Value =
                     [
                         new Localization { LanguageCode = "nb", Value = "Venter på befaring" },
+                        new Localization { LanguageCode = "nn", Value = "Ventar på synfaring" },
                         new Localization { LanguageCode = "en", Value = "Awaiting inspection" }
                     ]
                 },
@@ -165,6 +175,7 @@ public class CreateDialogDtoSamples
                     Value =
                     [
                         new Localization { LanguageCode = "nb", Value = "https://example.com/byggesak/2026-0042/embed?lang=nb" },
+                        new Localization { LanguageCode = "nn", Value = "https://example.com/byggesak/2026-0042/embed?lang=nn" },
                         new Localization { LanguageCode = "en", Value = "https://example.com/byggesak/2026-0042/embed?lang=en" }
                     ]
                 }
@@ -187,6 +198,7 @@ public class CreateDialogDtoSamples
                     DisplayName =
                     [
                         new Localization { LanguageCode = "nb", Value = "Søknadsskjema (PDF)" },
+                        new Localization { LanguageCode = "nn", Value = "Søknadsskjema (PDF)" },
                         new Localization { LanguageCode = "en", Value = "Application form (PDF)" }
                     ],
                     Urls =
@@ -211,6 +223,7 @@ public class CreateDialogDtoSamples
                     DisplayName =
                     [
                         new Localization { LanguageCode = "nb", Value = "Situasjonsplan" },
+                        new Localization { LanguageCode = "nn", Value = "Situasjonsplan" },
                         new Localization { LanguageCode = "en", Value = "Site plan" }
                     ],
                     ExpiresAt = now.AddMonths(6),
@@ -244,6 +257,7 @@ public class CreateDialogDtoSamples
                             Value =
                             [
                                 new Localization { LanguageCode = "nb", Value = "Anmodning om tilleggsopplysninger" },
+                                new Localization { LanguageCode = "nn", Value = "Oppmoding om tilleggsopplysningar" },
                                 new Localization { LanguageCode = "en", Value = "Request for additional information" }
                             ]
                         },
@@ -253,6 +267,7 @@ public class CreateDialogDtoSamples
                             Value =
                             [
                                 new Localization { LanguageCode = "nb", Value = "Vi trenger oppdatert situasjonsplan i målestokk 1:500 før vi kan behandle søknaden videre." },
+                                new Localization { LanguageCode = "nn", Value = "Vi treng oppdatert situasjonsplan i målestokk 1:500 før vi kan behandle søknaden vidare." },
                                 new Localization { LanguageCode = "en", Value = "We need an updated site plan at 1:500 scale before we can process the application further." }
                             ]
                         }
@@ -265,6 +280,7 @@ public class CreateDialogDtoSamples
                             DisplayName =
                             [
                                 new Localization { LanguageCode = "nb", Value = "Mangelbrev" },
+                                new Localization { LanguageCode = "nn", Value = "Mangelbrev" },
                                 new Localization { LanguageCode = "en", Value = "Deficiency letter" }
                             ],
                             Urls =
@@ -287,6 +303,7 @@ public class CreateDialogDtoSamples
                             Title =
                             [
                                 new Localization { LanguageCode = "nb", Value = "Last opp dokumentasjon" },
+                                new Localization { LanguageCode = "nn", Value = "Last opp dokumentasjon" },
                                 new Localization { LanguageCode = "en", Value = "Upload documentation" }
                             ]
                         }
@@ -312,6 +329,7 @@ public class CreateDialogDtoSamples
                             Value =
                             [
                                 new Localization { LanguageCode = "nb", Value = "Innsending av oppdatert situasjonsplan" },
+                                new Localization { LanguageCode = "nn", Value = "Innsending av oppdatert situasjonsplan" },
                                 new Localization { LanguageCode = "en", Value = "Submission of updated site plan" }
                             ]
                         },
@@ -321,6 +339,7 @@ public class CreateDialogDtoSamples
                             Value =
                             [
                                 new Localization { LanguageCode = "nb", Value = "Vedlagt følger oppdatert situasjonsplan i målestokk 1:500." },
+                                new Localization { LanguageCode = "nn", Value = "Vedlagt følgjer oppdatert situasjonsplan i målestokk 1:500." },
                                 new Localization { LanguageCode = "en", Value = "Attached is an updated site plan at 1:500 scale." }
                             ]
                         }
@@ -333,6 +352,7 @@ public class CreateDialogDtoSamples
                             DisplayName =
                             [
                                 new Localization { LanguageCode = "nb", Value = "Situasjonsplan (revidert)" },
+                                new Localization { LanguageCode = "nn", Value = "Situasjonsplan (revidert)" },
                                 new Localization { LanguageCode = "en", Value = "Site plan (revised)" }
                             ],
                             Urls =
@@ -362,6 +382,7 @@ public class CreateDialogDtoSamples
                     Title =
                     [
                         new Localization { LanguageCode = "nb", Value = "Fortsett utfylling" },
+                        new Localization { LanguageCode = "nn", Value = "Hald fram med utfylling" },
                         new Localization { LanguageCode = "en", Value = "Continue filling out" }
                     ]
                 },
@@ -376,11 +397,13 @@ public class CreateDialogDtoSamples
                     Title =
                     [
                         new Localization { LanguageCode = "nb", Value = "Send inn" },
+                        new Localization { LanguageCode = "nn", Value = "Send inn" },
                         new Localization { LanguageCode = "en", Value = "Submit" }
                     ],
                     Prompt =
                     [
                         new Localization { LanguageCode = "nb", Value = "Søknaden kan ikke endres etter innsending. Vil du fortsette?" },
+                        new Localization { LanguageCode = "nn", Value = "Søknaden kan ikkje endrast etter innsending. Vil du halde fram?" },
                         new Localization { LanguageCode = "en", Value = "The application cannot be changed after submission. Do you want to continue?" }
                     ]
                 },
@@ -395,11 +418,13 @@ public class CreateDialogDtoSamples
                     Title =
                     [
                         new Localization { LanguageCode = "nb", Value = "Slett søknaden" },
+                        new Localization { LanguageCode = "nn", Value = "Slett søknaden" },
                         new Localization { LanguageCode = "en", Value = "Delete the application" }
                     ],
                     Prompt =
                     [
                         new Localization { LanguageCode = "nb", Value = "Dette sletter søknaden permanent." },
+                        new Localization { LanguageCode = "nn", Value = "Dette slettar søknaden permanent." },
                         new Localization { LanguageCode = "en", Value = "This will permanently delete the application." }
                     ]
                 }
@@ -463,6 +488,7 @@ public class CreateDialogDtoSamples
                     Description =
                     [
                         new Localization { LanguageCode = "nb", Value = "Saken er tildelt saksbehandler." },
+                        new Localization { LanguageCode = "nn", Value = "Saka er tildelt saksbehandlar." },
                         new Localization { LanguageCode = "en", Value = "The case has been assigned to a case worker." }
                     ]
                 },
