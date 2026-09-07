@@ -6,6 +6,6 @@
     </Folder>
     <Folder Name="/ServiceOwner/">
         <Project Path="ServiceOwner/AltinnEvents/AltinnEvents.csproj" />
-        <Project Path="ServiceOwner/CreateDialog/CreateDialog.csproj" />
+        <Project Path="ServiceOwner\CreateDialogSample\CreateDialogSample.csproj" />
     </Folder>
 </Solution>
