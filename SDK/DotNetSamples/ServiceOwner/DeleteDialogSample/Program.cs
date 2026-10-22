@@ -32,4 +32,4 @@ if (!response.IsSuccessStatusCode)
     Console.WriteLine(response.Error.Message);
     return;
 }
-Console.WriteLine(response.IsSuccessStatusCode);
+Console.WriteLine(response.StatusCode);
