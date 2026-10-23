@@ -9,9 +9,8 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="Altinn.ApiClients.Dialogporten.EndUser" Version="1.118.7-alpha.1784896114" />
+      <PackageReference Include="Altinn.ApiClients.Dialogporten.EndUser" Version="1.120.0-alpha.1787836907" />
       <PackageReference Include="Microsoft.Extensions.Hosting" Version="10.0.10" />
-      <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="10.0.10" />
     </ItemGroup>
 
     <ItemGroup>

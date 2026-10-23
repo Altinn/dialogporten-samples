@@ -1,7 +1,8 @@
 using Altinn.ApiClients.Dialogporten;
 using Microsoft.Extensions.Hosting;
 using Altinn.ApiClients.Dialogporten.EndUser;
-using Altinn.ApiClients.Dialogporten.EndUser.Features.V1;
+using Altinn.ApiClients.Dialogporten.EndUser.Features.V1.Enums;
+using Altinn.ApiClients.Dialogporten.EndUser.Features.V1.SystemLabels;
 using Altinn.ApiClients.Maskinporten.Models;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -51,7 +52,7 @@ if (!dialog.IsSuccessful)
     return 1;
 }
 
-var systemLabels = dialog.Content.EndUserContext.SystemLabels ?? new List<SystemLabel>();
+var systemLabels = dialog.Content.EndUserContext.SystemLabels;
 
 Console.Write(
     $"DialogId: {dialog.Content.Id}\n" +

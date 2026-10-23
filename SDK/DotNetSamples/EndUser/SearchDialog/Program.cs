@@ -3,6 +3,7 @@ using Altinn.ApiClients.Dialogporten;
 using Microsoft.Extensions.Hosting;
 using Altinn.ApiClients.Dialogporten.EndUser;
 using Altinn.ApiClients.Dialogporten.EndUser.Features.V1;
+using Altinn.ApiClients.Dialogporten.EndUser.Features.V1.Search;
 using Altinn.ApiClients.Maskinporten.Models;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -24,7 +25,7 @@ using var app = builder.Build();
 
 var endUserApi = app.Services.GetRequiredService<IEndUserApi>().V1;
 
-async IAsyncEnumerable<DialogListItem> SearchAllDialogs(List<string> parties, AcceptedLanguages acceptLanguage, [EnumeratorCancellation] CancellationToken ct, MaskinportenRequestContext context)
+async IAsyncEnumerable<DialogListItem> SearchAllDialogs(List<string> parties, [EnumeratorCancellation] CancellationToken ct, MaskinportenRequestContext context)
 {
     string? continuationToken = null;
     bool hasNextPage;
@@ -44,10 +45,10 @@ async IAsyncEnumerable<DialogListItem> SearchAllDialogs(List<string> parties, Ac
 
         var result = await endUserApi.SearchDialogs(
             queryParams,
-            acceptLanguage,
-            context);
+            requestContext: context,
+            cancellationToken: ct);
 
-        if (!result.IsSuccessful || result.Content?.Items == null)
+        if (!result.IsSuccessful || result.Content == null)
         {
             throw new InvalidOperationException("Failed to search dialogs");
         }
@@ -84,7 +85,6 @@ var maskinPortenRequest = new MaskinportenRequestContext()
 var ct = new CancellationTokenSource(TimeSpan.FromSeconds(10));
 await foreach (var item in SearchAllDialogs(
                    party,
-                   null!,
                    ct.Token,
                    maskinPortenRequest
                ))
@@ -96,22 +96,20 @@ await foreach (var item in SearchAllDialogs(
         $"Party: {item.Party}\n" +
         $"Nr of transmissions (Party/ServiceOwner): {item.FromPartyTransmissionsCount} / {item.FromServiceOwnerTransmissionsCount}\n");
 
-    var dialog = await endUserApi.GetDialog(item.Id, null!, maskinPortenRequest);
+    var dialog = await endUserApi.GetDialog(item.Id, requestContext: maskinPortenRequest);
     if (dialog.IsSuccessful)
     {
-        if (dialog.Content.Transmissions != null)
-            foreach (var transmission in dialog.Content.Transmissions)
-            {
-                Console.WriteLine(
-                    $"ID: {transmission.Id}\n" +
-                    $"Title: {transmission.Content.Title.Value?.FirstOrDefault()?.Value ?? "(no title)"}\n");
-            }
+        foreach (var transmission in dialog.Content.Transmissions)
+        {
+            Console.WriteLine(
+                $"ID: {transmission.Id}\n" +
+                $"Title: {transmission.Content.Title.Value?.FirstOrDefault()?.Value ?? "(no title)"}\n");
+        }
     }
     else
     {
         Console.Error.WriteLine($"Failed to get dialog {item.Id}");
     }
 }
-
 
 return 0;
