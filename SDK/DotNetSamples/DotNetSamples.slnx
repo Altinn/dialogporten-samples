@@ -8,6 +8,6 @@
         <Project Path="ServiceOwner/AltinnEvents/AltinnEvents.csproj"/>
         <Project Path="ServiceOwner/DialogTokenValidation/DialogTokenValidation.csproj"/>
         <Project Path="ServiceOwner/DeleteDialogSample/DeleteDialogSample.csproj"/>
-        <Project Path="ServiceOwner\CreateDialogSample\CreateDialogSample.csproj"/>
+        <Project Path="ServiceOwner/CreateDialogSample/CreateDialogSample.csproj"/>
     </Folder>
 </Solution>
