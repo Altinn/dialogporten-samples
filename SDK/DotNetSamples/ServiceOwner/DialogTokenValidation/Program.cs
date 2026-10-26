@@ -28,6 +28,9 @@ app.MapPost("validateToken", (HttpRequest request, [FromBody] string body) =>
     // Read the authorization header to get the dialog token
     var token = request.Headers.Authorization.ToString().Replace("Bearer ", "");
 
+    // Validate handles checking of signature, lifetime(nbf/epf) and optionally dialogId
+    // for more information on what to validate see:
+    // https://docs.altinn.studio/en/dialogporten/reference/authorization/dialog-tokens/#token-validation-recommendations    
     // Checks if the Lifetime of the token is valid and if it's representing the dialogId 
     var result = dialogTokenValidator.Validate(token, dialogId);
     if (!result.IsValid)
@@ -48,6 +51,7 @@ app.MapPost("validateToken", (HttpRequest request, [FromBody] string body) =>
 
     var authLevel = claim.Value;
     Console.WriteLine(authLevel);
+    // for information about auth level see: https://docs.altinn.studio/en/dialogporten/user-guides/getting-dialog-details/#authentication-level
     if (authLevel != "4")
     {
         Console.WriteLine("Auth level too low");
