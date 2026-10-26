@@ -1,8 +1,10 @@
-﻿using Altinn.ApiClients.Dialogporten;
+﻿using System.Diagnostics;
+using Altinn.ApiClients.Dialogporten;
 using Altinn.ApiClients.Dialogporten.ServiceOwner;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,9 +21,13 @@ var app = builder.Build();
 
 var dialogTokenValidator = app.Services.GetRequiredService<IDialogTokenValidator>();
 app.UseHttpsRedirection();
-app.MapPost("validateToken", ([FromBody] string token) =>
+
+app.MapPost("validateToken", (HttpRequest request, [FromBody] string body) =>
 {
-    var dialogId = Guid.CreateVersion7(); // Use valid dialogId
+    var dialogId = Guid.Parse(body);
+    // Read the authorization header to get the dialog token
+    var token = request.Headers.Authorization.ToString().Replace("Bearer ", "");
+
     // Checks if the Lifetime of the token is valid and if it's representing the dialogId 
     var result = dialogTokenValidator.Validate(token, dialogId);
     if (!result.IsValid)
@@ -31,12 +37,13 @@ app.MapPost("validateToken", ([FromBody] string token) =>
     }
 
     var claims = result.ClaimsPrincipal;
-    // https://docs.altinn.studio/nb/dialogporten/reference/authorization/dialog-tokens/#liste-over-dialogporten-spesifikke-claims
+    // https://docs.altinn.studio/en/dialogporten/reference/authorization/dialog-tokens/#list-of-dialogporten-specific-claims
     // Check Security level of authentication
     var claim = claims.FindFirst("l");
     if (claim is null)
     {
-       throw new Exception("Something went wrong");
+        // authLevel claim "l" is required and should be present in the token
+        throw new UnreachableException("Could not find required claim");
     }
 
     var authLevel = claim.Value;
