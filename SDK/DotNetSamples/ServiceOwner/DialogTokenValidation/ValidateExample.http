@@ -1,0 +1,11 @@
+# replace lt + with dialogToken
+@token = DialogToken
+# Replace with valid dialogId
+@dialogId = ""
+### ValidateToken
+POST localhost:5000/validateToken
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{{dialogId}}
+###
