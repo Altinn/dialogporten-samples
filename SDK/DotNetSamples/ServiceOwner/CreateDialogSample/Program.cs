@@ -26,8 +26,7 @@ var serviceOwnerApi = app.Services.GetRequiredService<IServiceOwnerApi>().V1;
 List<CreateDialog> createDialogDtos = [CreateDialogDtoSamples.ComplexDialogDto(), CreateDialogDtoSamples.MinimalDialogDto()];
 foreach (var createDialog in createDialogDtos)
 {
-    var ct = CancellationToken.None;
-    var createDialogResponse = await serviceOwnerApi.CreateDialog(createDialog, ct);
+    var createDialogResponse = await serviceOwnerApi.CreateDialog(createDialog);
     if (createDialogResponse.IsSuccessStatusCode)
     {
         Console.WriteLine("Dialog successfully created.");

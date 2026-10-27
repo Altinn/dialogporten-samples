@@ -1,4 +1,4 @@
-using Altinn.ApiClients.Dialogporten;
+﻿using Altinn.ApiClients.Dialogporten;
 using Microsoft.Extensions.Hosting;
 using Altinn.ApiClients.Dialogporten.EndUser;
 using Altinn.ApiClients.Dialogporten.EndUser.Features.V1.Enums;
@@ -35,10 +35,14 @@ var systemUserOrgNumber = "";
 var dialogId = Guid.Empty;
 
 if (string.IsNullOrWhiteSpace(systemUserOrgNumber))
+{
     throw new ArgumentException("SystemUserOrgNumber must be set to the organization number of the company that owns the system user.");
+}
 
 if (dialogId == Guid.Empty)
+{
     throw new ArgumentException("DialogId must be set to the ID of the dialog you want to change label.");
+}
 
 var maskinPortenRequest = new MaskinportenRequestContext
     { SystemUser = new SystemUser { OrganizationNumber = systemUserOrgNumber } };
@@ -57,12 +61,12 @@ Console.Write(
     $"System Labels: {string.Join(", ", systemLabels)}\n");
 
 // Toggle label between Archive and default
-var newSystemLabels = new List<SystemLabel>
-{
+List<SystemLabel> newSystemLabels =
+[
     systemLabels.FirstOrDefault() == SystemLabel.Default
         ? SystemLabel.Archive
         : SystemLabel.Default
-};
+];
 
 var results = await endUserApi.SetDialogSystemLabels(dialogId, new SetDialogSystemLabelRequest { AddLabels = newSystemLabels}, requestContext: maskinPortenRequest);
 if (!results.IsSuccessful)

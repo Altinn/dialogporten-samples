@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using Altinn.ApiClients.Dialogporten;
+﻿using Altinn.ApiClients.Dialogporten;
 using Altinn.ApiClients.Dialogporten.ServiceOwner;
 using Altinn.ApiClients.Dialogporten.ServiceOwner.Features.V1.Common;
 using Altinn.ApiClients.Dialogporten.ServiceOwner.Features.V1.Mapping;
@@ -45,15 +44,15 @@ if (!getDialogRequest.IsSuccessStatusCode)
 }
 
 var dialog = getDialogRequest.Content;
-if (dialog == null)
+if (dialog is null)
 {
-    throw new UnreachableException("Something went wrong");
+    throw new InvalidOperationException("Something went wrong");
 }
 
 var updateDialog = dialog.ToUpdateDialog();
 updateDialog.Content.Title = new ContentValue
 {
-    Value = new List<Localization> { new() { Value = "Ny tittel!", LanguageCode = "nb" } },
+    Value = [new Localization { Value = "Ny tittel!", LanguageCode = "nb" }],
     MediaType = "text/plain",
 };
 

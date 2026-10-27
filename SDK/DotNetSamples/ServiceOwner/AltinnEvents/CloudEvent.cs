@@ -2,7 +2,7 @@ namespace AltinnEvents;
 
 public sealed class CloudEvent
 {
-    public string SpecVersion { get; set; }
+    public string SpecVersion { get; set; } = null!;
     public Guid Id { get; set; }
     public string Type { get; set; } = null!;
     public DateTimeOffset Time { get; set; }

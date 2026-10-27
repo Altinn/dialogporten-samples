@@ -1,4 +1,4 @@
-using System.Runtime.CompilerServices;
+﻿using System.Runtime.CompilerServices;
 using Altinn.ApiClients.Dialogporten;
 using Microsoft.Extensions.Hosting;
 using Altinn.ApiClients.Dialogporten.EndUser;
@@ -25,42 +25,6 @@ using var app = builder.Build();
 
 var endUserApi = app.Services.GetRequiredService<IEndUserApi>().V1;
 
-async IAsyncEnumerable<DialogListItem> SearchAllDialogs(List<string> parties, [EnumeratorCancellation] CancellationToken ct, MaskinportenRequestContext context)
-{
-    string? continuationToken = null;
-    bool hasNextPage;
-
-    var queryParams = new SearchDialogsQueryParams
-    {
-        Party = parties,
-        // Set low limit to force use of continuationToken
-        Limit = 4
-    };
-
-    do
-    {
-        ct.ThrowIfCancellationRequested();
-        if (continuationToken != null)
-            queryParams.ContinuationToken = continuationToken;
-
-        var result = await endUserApi.SearchDialogs(
-            queryParams,
-            requestContext: context,
-            cancellationToken: ct);
-
-        if (!result.IsSuccessful || result.Content == null)
-        {
-            throw new InvalidOperationException("Failed to search dialogs");
-        }
-
-        foreach (var item in result.Content.Items)
-            yield return item;
-
-        continuationToken = result.Content.ContinuationToken;
-        hasNextPage = result.Content.HasNextPage;
-    } while (hasNextPage);
-}
-
 
 // Party: Must be set to a list of companies or persons that you want to see dialogs from.
 // SystemUser:OrganizationNumber: Must be set to the organization number of the company that owns the system user
@@ -73,17 +37,21 @@ List<string> party = [];
 string? systemUserOrgNumber = null;
 
 if (party.Count == 0)
+{
     throw new ArgumentException("Parties must be set to the company or person that you want to see dialogs from.");
+}
 
-if (systemUserOrgNumber == null)
+if (systemUserOrgNumber is null)
+{
     throw new ArgumentException("SystemUserOrgNumber must be set to the organization number of the company that owns the system user.");
+}
 
 
 var maskinPortenRequest = new MaskinportenRequestContext()
     { SystemUser = new SystemUser { OrganizationNumber = systemUserOrgNumber } };
 
-var ct = new CancellationTokenSource(TimeSpan.FromSeconds(10));
-await foreach (var item in SearchAllDialogs(party, ct.Token, maskinPortenRequest))
+using var cts = new CancellationTokenSource(TimeSpan.FromSeconds(10));
+await foreach (var item in SearchAllDialogs(party, cts.Token, maskinPortenRequest))
 {
     Console.WriteLine(
         $"ID: {item.Id}\n" +
@@ -108,3 +76,43 @@ await foreach (var item in SearchAllDialogs(party, ct.Token, maskinPortenRequest
 }
 
 return 0;
+
+async IAsyncEnumerable<DialogListItem> SearchAllDialogs(List<string> parties, [EnumeratorCancellation] CancellationToken ct, MaskinportenRequestContext context)
+{
+    string? continuationToken = null;
+    bool hasNextPage;
+
+    var queryParams = new SearchDialogsQueryParams
+    {
+        Party = parties,
+        // Set low limit to force use of continuationToken
+        Limit = 4
+    };
+
+    do
+    {
+        ct.ThrowIfCancellationRequested();
+        if (continuationToken is not null)
+        {
+            queryParams.ContinuationToken = continuationToken;
+        }
+
+        var result = await endUserApi.SearchDialogs(
+            queryParams,
+            requestContext: context,
+            cancellationToken: ct);
+
+        if (!result.IsSuccessful || result.Content is null)
+        {
+            throw new InvalidOperationException("Failed to search dialogs");
+        }
+
+        foreach (var item in result.Content.Items)
+        {
+            yield return item;
+        }
+
+        continuationToken = result.Content.ContinuationToken;
+        hasNextPage = result.Content.HasNextPage;
+    } while (hasNextPage);
+}

@@ -4,9 +4,8 @@ using Altinn.ApiClients.Dialogporten.ServiceOwner.Features.V1.Enums;
 
 namespace CreateDialogSample;
 
-public class CreateDialogDtoSamples
+public static class CreateDialogDtoSamples
 {
-
     /// <summary>
     /// A dialog with only the fields the API requires: the service resource it belongs to,
     /// the party it concerns, and a localized title. Everything else is left to the defaults

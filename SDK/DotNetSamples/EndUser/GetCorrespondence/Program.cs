@@ -37,11 +37,15 @@ var httpClient = app.Services.GetRequiredService<IHttpClientFactory>().CreateCli
 string? systemUserOrgNumber = null;
 var dialogId = Guid.Empty;
 
-if (systemUserOrgNumber == null)
+if (systemUserOrgNumber is null)
+{
     throw new ArgumentException("SystemUserOrgNumber must be set to the organization number of the company that owns the system user.");
+}
 
 if (dialogId == Guid.Empty)
+{
     throw new ArgumentException("DialogId must be set to the ID of the dialog you want to change label.");
+}
 
 var maskinPortenRequest = new MaskinportenRequestContext()
     { SystemUser = new SystemUser { OrganizationNumber = systemUserOrgNumber } };
@@ -73,7 +77,10 @@ foreach (var action in dialog.Content.ApiActions)
         Console.WriteLine($"\tURL: {endpoint.Url}\n");
 
         // Not all actions have name. Thus check on HttpMethod and URL
-        if (!endpoint.HttpMethod.ToString().Equals("GET", StringComparison.OrdinalIgnoreCase)) continue;
+        if (!endpoint.HttpMethod.ToString().Equals("GET", StringComparison.OrdinalIgnoreCase))
+        {
+            continue;
+        }
 
         // For correspondence messages we assume that the download URL contains "download" and is of type zip
         if (endpoint.Url.ToString().Contains("download"))
@@ -113,7 +120,9 @@ async Task<HttpResponseMessage> GetWithToken(Uri url)
 {
     var request = new HttpRequestMessage(HttpMethod.Get, url);
     var token = dialog.Content.DialogToken;
-    if (token != null)
+    if (token is not null)
+    {
         request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
+    }
     return await httpClient.SendAsync(request);
 }
