@@ -2,8 +2,6 @@ using Altinn.ApiClients.Dialogporten.ServiceOwner.Features.V1.Common;
 using Altinn.ApiClients.Dialogporten.ServiceOwner.Features.V1.Create;
 using Altinn.ApiClients.Dialogporten.ServiceOwner.Features.V1.Enums;
 
-namespace CreateDialogSample;
-
 public static class CreateDialogDtoSamples
 {
     /// <summary>

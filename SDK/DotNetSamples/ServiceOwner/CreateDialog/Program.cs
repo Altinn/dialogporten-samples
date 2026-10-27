@@ -1,7 +1,6 @@
 ﻿using Altinn.ApiClients.Dialogporten;
 using Altinn.ApiClients.Dialogporten.ServiceOwner;
 using Altinn.ApiClients.Dialogporten.ServiceOwner.Features.V1.Create;
-using CreateDialogSample;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
