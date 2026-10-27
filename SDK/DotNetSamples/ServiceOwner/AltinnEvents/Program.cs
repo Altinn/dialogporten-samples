@@ -76,13 +76,16 @@ async Task CreatedHandler(IServiceOwnerApi serviceOwnerApi, CloudEvent cloudEven
         Type = DialogActivityType.Information,
         Description =
         [
-            new()
+            new Localization
             {
                 Value = "Dialog created",
                 LanguageCode = "en"
             }
         ],
-        PerformedBy = new Actor() // Trenger vi at denne er required?
+        PerformedBy = new Actor
+        {
+            ActorType = ActorType.ServiceOwner
+        }
     };
     var createActivityResponse = await serviceOwnerApi.V1.CreateDialogActivity(id, req, dialog.Revision, cancellationToken);
     Console.WriteLine($" Create activity statusCode: {createActivityResponse.StatusCode}");

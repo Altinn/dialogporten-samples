@@ -15,7 +15,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="Altinn.ApiClients.Dialogporten.EndUser" Version="1.120.0-alpha.1787836907" />
+      <PackageReference Include="Altinn.ApiClients.Dialogporten.EndUser" Version="1.125.0-alpha.1792750144" />
       <PackageReference Include="Microsoft.Extensions.Hosting" Version="10.0.11" />
     </ItemGroup>
 

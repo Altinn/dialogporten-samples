@@ -12,9 +12,9 @@ var builder = Host.CreateApplicationBuilder(args);
 
 builder.Configuration.AddUserSecrets<Program>(optional: true);
 var dialogportenSettings = builder.Configuration
-    .GetSection("DialogportenSettings")
-    .Get<DialogportenSettings>()
-    ?? throw new InvalidOperationException(
+        .GetSection("DialogportenSettings")
+        .Get<DialogportenSettings>()
+ ?? throw new InvalidOperationException(
         "Configuration section 'DialogportenSettings' is missing or invalid. " +
         "Ensure appsettings.json is present in the output directory and contains a valid DialogportenSettings section.");
 
@@ -61,14 +61,14 @@ async IAsyncEnumerable<DialogListItem> SearchAllDialogs(List<string> parties, [E
     } while (hasNextPage);
 }
 
-/*
- * Party: Must be set to a list of companies or persons that you want to see dialogs from.
- * SystemUser:OrganizationNumber: Must be set to the organization number of the company that owns the system user
- *
- * Example:
- * List<string> party = ["urn:altinn:organization:identifier-no:212485772", "urn:altinn:organization:identifier-no:315236746"];
- * string? systemUserOrgNumber = "314251571";
- */
+
+// Party: Must be set to a list of companies or persons that you want to see dialogs from.
+// SystemUser:OrganizationNumber: Must be set to the organization number of the company that owns the system user
+//
+// Example:
+// List<string> party = ["urn:altinn:organization:identifier-no:212485772", "urn:altinn:organization:identifier-no:315236746"];
+// string? systemUserOrgNumber = "314251571";
+
 List<string> party = [];
 string? systemUserOrgNumber = null;
 
@@ -83,11 +83,7 @@ var maskinPortenRequest = new MaskinportenRequestContext()
     { SystemUser = new SystemUser { OrganizationNumber = systemUserOrgNumber } };
 
 var ct = new CancellationTokenSource(TimeSpan.FromSeconds(10));
-await foreach (var item in SearchAllDialogs(
-                   party,
-                   ct.Token,
-                   maskinPortenRequest
-               ))
+await foreach (var item in SearchAllDialogs(party, ct.Token, maskinPortenRequest))
 {
     Console.WriteLine(
         $"ID: {item.Id}\n" +
@@ -97,18 +93,17 @@ await foreach (var item in SearchAllDialogs(
         $"Nr of transmissions (Party/ServiceOwner): {item.FromPartyTransmissionsCount} / {item.FromServiceOwnerTransmissionsCount}\n");
 
     var dialog = await endUserApi.GetDialog(item.Id, requestContext: maskinPortenRequest);
-    if (dialog.IsSuccessful)
-    {
-        foreach (var transmission in dialog.Content.Transmissions)
-        {
-            Console.WriteLine(
-                $"ID: {transmission.Id}\n" +
-                $"Title: {transmission.Content.Title.Value?.FirstOrDefault()?.Value ?? "(no title)"}\n");
-        }
-    }
-    else
+    if (!dialog.IsSuccessful)
     {
         Console.Error.WriteLine($"Failed to get dialog {item.Id}");
+        return 1;
+    }
+
+    foreach (var transmission in dialog.Content.Transmissions)
+    {
+        Console.WriteLine(
+            $"ID: {transmission.Id}\n" +
+            $"Title: {transmission.Content.Title.Value?.FirstOrDefault()?.Value ?? "(no title)"}\n");
     }
 }
 

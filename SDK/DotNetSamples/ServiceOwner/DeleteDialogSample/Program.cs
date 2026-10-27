@@ -22,7 +22,14 @@ using var app = builder.Build();
 var serviceOwnerApi = app.Services.GetRequiredService<IServiceOwnerApi>().V1;
 
 // Id to an existing dialog
-var dialogId = Guid.Parse("01a16326-2071-75bf-b936-f55886035b4e");
+// var dialogId = Guid.Parse("01a16326-2071-75bf-b936-f55886035b4e");
+var dialogId = Guid.Empty;
+
+if (dialogId == Guid.Empty)
+{
+    Console.WriteLine("DialogId must be set to the ID of the dialog you want to delete.");
+    return 1;
+}
 
 var response = await serviceOwnerApi.DeleteDialog(dialogId);
 
@@ -30,6 +37,7 @@ if (!response.IsSuccessStatusCode)
 {
     Console.WriteLine($"Failed to delete dialog with ID {dialogId}. Status code: {response.StatusCode}");
     Console.WriteLine(response.Error.Message);
-    return;
+    return 1;
 }
 Console.WriteLine(response.StatusCode);
+return 0;

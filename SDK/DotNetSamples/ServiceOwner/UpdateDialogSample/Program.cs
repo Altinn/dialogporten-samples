@@ -25,7 +25,14 @@ using var app = builder.Build();
 var serviceOwnerApi = app.Services.GetRequiredService<IServiceOwnerApi>().V1;
 
 // Insert dialog id of an existing dialog
-var dialogId = Guid.CreateVersion7();
+// var dialogId = Guid.Parse("01a16326-2071-75bf-b936-f55886035b4e");
+var dialogId = Guid.Empty;
+
+if (dialogId == Guid.Empty)
+{
+    Console.WriteLine("DialogId must be set to the ID of the dialog you want to update.");
+    return 1;
+}
 
 var getDialogRequest = await serviceOwnerApi.GetDialog(dialogId);
 
@@ -34,7 +41,7 @@ if (!getDialogRequest.IsSuccessStatusCode)
     Console.WriteLine("Something went wrong");
     Console.WriteLine(getDialogRequest.Error.ReasonPhrase);
     Console.WriteLine(getDialogRequest.Error.Content);
-    return;
+    return 1;
 }
 
 var dialog = getDialogRequest.Content;
@@ -62,3 +69,5 @@ else
     Console.WriteLine(updateResponse.Error.ReasonPhrase);
     Console.WriteLine(updateResponse.Error.Content);
 }
+
+return 0;

@@ -1,4 +1,4 @@
-### POST Validate Subs
+### POST Validate Subscription
 POST http://localhost:5000/event
 Content-Type: application/json
 
