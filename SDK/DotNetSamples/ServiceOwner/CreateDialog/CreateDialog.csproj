@@ -9,8 +9,8 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="Altinn.ApiClients.Dialogporten.ServiceOwner" Version="1.124.1-alpha.1791989042" />
-      <PackageReference Include="Microsoft.Extensions.Hosting" Version="10.0.11" />
+      <PackageReference Include="Altinn.ApiClients.Dialogporten.ServiceOwner" Version="1.125.0-alpha.1793351325" />
+      <PackageReference Include="Microsoft.Extensions.Hosting" Version="11.0.0-rc.3.26522.148" />
     </ItemGroup>
 
 </Project>
