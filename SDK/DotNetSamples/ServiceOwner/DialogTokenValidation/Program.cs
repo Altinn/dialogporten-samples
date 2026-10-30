@@ -1,8 +1,8 @@
 ﻿using Altinn.ApiClients.Dialogporten;
 using Altinn.ApiClients.Dialogporten.ServiceOwner;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 var builder = WebApplication.CreateBuilder(args);
