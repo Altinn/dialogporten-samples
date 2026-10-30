@@ -2,11 +2,8 @@ using Altinn.ApiClients.Dialogporten.ServiceOwner.Features.V1.Common;
 using Altinn.ApiClients.Dialogporten.ServiceOwner.Features.V1.Create;
 using Altinn.ApiClients.Dialogporten.ServiceOwner.Features.V1.Enums;
 
-namespace CreateDialogSample;
-
-public class CreateDialogDtoSamples
+public static class CreateDialogDtoSamples
 {
-
     /// <summary>
     /// A dialog with only the fields the API requires: the service resource it belongs to,
     /// the party it concerns, and a localized title. Everything else is left to the defaults
@@ -377,7 +374,7 @@ public class CreateDialogDtoSamples
                 {
                     Action = "write",
                     Priority = DialogGuiActionPriority.Primary,
-                    HttpMethod = HttpVerb.GET,
+                    HttpMethod = HttpVerb.Get,
                     Url = new Uri("https://example.com/byggesak/2026-0042"),
                     Title =
                     [
@@ -390,7 +387,7 @@ public class CreateDialogDtoSamples
                 {
                     Action = "submit",
                     Priority = DialogGuiActionPriority.Secondary,
-                    HttpMethod = HttpVerb.POST,
+                    HttpMethod = HttpVerb.Post,
                     Url = new Uri("https://example.com/byggesak/2026-0042/send-inn"),
                     // Custom authorization rule in the XACML policy for the service.
                     AuthorizationAttribute = "urn:altinn:subresource:innsending",
@@ -411,7 +408,7 @@ public class CreateDialogDtoSamples
                 {
                     Action = "delete",
                     Priority = DialogGuiActionPriority.Tertiary,
-                    HttpMethod = HttpVerb.DELETE,
+                    HttpMethod = HttpVerb.Delete,
                     // Lets frontends render this with the appropriate destructive UX.
                     IsDeleteDialogAction = true,
                     Url = new Uri("https://example.com/byggesak/2026-0042"),
@@ -442,7 +439,7 @@ public class CreateDialogDtoSamples
                         new CreateDialogApiActionEndpoint
                         {
                             Version = "v2",
-                            HttpMethod = HttpVerb.GET,
+                            HttpMethod = HttpVerb.Get,
                             Url = new Uri("https://api.example.com/v2/byggesak/2026-0042"),
                             ResponseSchema = new Uri("https://api.example.com/schemas/v2/byggesak.json"),
                             DocumentationUrl = new Uri("https://docs.example.com/byggesak/v2")
@@ -450,7 +447,7 @@ public class CreateDialogDtoSamples
                         new CreateDialogApiActionEndpoint
                         {
                             Version = "v1",
-                            HttpMethod = HttpVerb.GET,
+                            HttpMethod = HttpVerb.Get,
                             Url = new Uri("https://api.example.com/v1/byggesak/2026-0042"),
                             Deprecated = true,
                             SunsetAt = now.AddMonths(6)
@@ -467,7 +464,7 @@ public class CreateDialogDtoSamples
                         new CreateDialogApiActionEndpoint
                         {
                             Version = "v2",
-                            HttpMethod = HttpVerb.POST,
+                            HttpMethod = HttpVerb.Post,
                             Url = new Uri("https://api.example.com/v2/byggesak/2026-0042/send-inn"),
                             RequestSchema = new Uri("https://api.example.com/schemas/v2/byggesak-innsending.json"),
                             ResponseSchema = new Uri("https://api.example.com/schemas/v2/kvittering.json")

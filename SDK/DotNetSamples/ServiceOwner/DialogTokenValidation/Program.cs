@@ -1,9 +1,8 @@
-﻿using System.Diagnostics;
-using Altinn.ApiClients.Dialogporten;
+﻿using Altinn.ApiClients.Dialogporten;
 using Altinn.ApiClients.Dialogporten.ServiceOwner;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 var builder = WebApplication.CreateBuilder(args);
@@ -46,7 +45,7 @@ app.MapPost("validateToken", (HttpRequest request, [FromBody] string body) =>
     if (claim is null)
     {
         // authLevel claim "l" is required and should be present in the token
-        throw new UnreachableException("Could not find required claim");
+        throw new InvalidOperationException("Could not find required claim 'l'");
     }
 
     var authLevel = claim.Value;
