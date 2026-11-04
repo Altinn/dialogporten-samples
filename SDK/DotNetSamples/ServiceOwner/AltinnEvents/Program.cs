@@ -35,11 +35,11 @@ app.MapPost("/event", async (
     {
         case "dialogporten.dialog.created.v1":
             logger.LogInformation("Dialog created event");
-            await CreatedHandler(serviceOwnerApi, cloudEvent, cancellationToken);
+            await HandleDialogCreated(serviceOwnerApi, cloudEvent, cancellationToken);
             break;
         case "dialogporten.dialog.updated.v1":
             logger.LogInformation("Dialog updated event");
-            await UpdateHandler(cloudEvent, serviceOwnerApi, cancellationToken);
+            await HandleDialogUpdated(serviceOwnerApi, cloudEvent, cancellationToken);
             break;
         case "platform.events.validatesubscription":
             // For validation of subscription sent by altinn events when creating a subscription
@@ -57,11 +57,11 @@ app.Run();
 return;
 
 
-async Task CreatedHandler(IServiceOwnerApi serviceOwnerApi, CloudEvent cloudEvent, CancellationToken cancellationToken)
+async Task HandleDialogCreated(IServiceOwnerApi serviceOwnerApi, CloudEvent cloudEvent, CancellationToken cancellationToken)
 {
     if (!Guid.TryParse(cloudEvent.ResourceInstance, out var id))
     {
-        throw new InvalidCastException(cloudEvent.ResourceInstance);
+        throw new ArgumentException(cloudEvent.ResourceInstance);
     }
     var getDialogResponse = await serviceOwnerApi.V1.GetDialog(id, cancellationToken: cancellationToken);
     Console.WriteLine($"StatusCode: {getDialogResponse.StatusCode}");
@@ -76,24 +76,26 @@ async Task CreatedHandler(IServiceOwnerApi serviceOwnerApi, CloudEvent cloudEven
         Type = DialogActivityType.Information,
         Description =
         [
-            new()
+            new Localization
             {
                 Value = "Dialog created",
                 LanguageCode = "en"
             }
         ],
-        PerformedBy = new Actor() // Trenger vi at denne er required?
+        PerformedBy = new Actor
+        {
+            ActorType = ActorType.ServiceOwner
+        }
     };
     var createActivityResponse = await serviceOwnerApi.V1.CreateDialogActivity(id, req, dialog.Revision, cancellationToken);
     Console.WriteLine($" Create activity statusCode: {createActivityResponse.StatusCode}");
 }
 
-async Task UpdateHandler(CloudEvent cloudEvent, IServiceOwnerApi serviceOwnerApi, CancellationToken cancellationToken)
+async Task HandleDialogUpdated(IServiceOwnerApi serviceOwnerApi, CloudEvent cloudEvent, CancellationToken cancellationToken)
 {
-
     if (!Guid.TryParse(cloudEvent.ResourceInstance, out var id))
     {
-        throw new InvalidCastException(cloudEvent.ResourceInstance);
+        throw new ArgumentException(cloudEvent.ResourceInstance);
     }
     var getDialogResponse = await serviceOwnerApi.V1.GetDialog(id, cancellationToken: cancellationToken);
     Console.WriteLine($"StatusCode: {getDialogResponse.StatusCode}");

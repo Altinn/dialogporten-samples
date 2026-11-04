@@ -1,5 +1,6 @@
 ﻿using Altinn.ApiClients.Dialogporten;
 using Altinn.ApiClients.Dialogporten.ServiceOwner;
+using Altinn.ApiClients.Dialogporten.ServiceOwner.Features.V1.Create;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -21,15 +22,19 @@ using var app = builder.Build();
 
 var serviceOwnerApi = app.Services.GetRequiredService<IServiceOwnerApi>().V1;
 
-// Id to an existing dialog
-var dialogId = Guid.Parse("01a16326-2071-75bf-b936-f55886035b4e");
-
-var response = await serviceOwnerApi.DeleteDialog(dialogId);
-
-if (!response.IsSuccessStatusCode)
+List<CreateDialog> createDialogDtos = [CreateDialogDtoSamples.ComplexDialogDto(), CreateDialogDtoSamples.MinimalDialogDto()];
+foreach (var createDialog in createDialogDtos)
 {
-    Console.WriteLine($"Failed to delete dialog with ID {dialogId}. Status code: {response.StatusCode}");
-    Console.WriteLine(response.Error.Message);
-    return;
+    var createDialogResponse = await serviceOwnerApi.CreateDialog(createDialog);
+    if (createDialogResponse.IsSuccessStatusCode)
+    {
+        Console.WriteLine("Dialog successfully created.");
+        Console.WriteLine(createDialogResponse.Content);
+    }
+    else
+    {
+        Console.WriteLine("Something went wrong.");
+        Console.WriteLine(createDialogResponse.ReasonPhrase);
+        Console.WriteLine(createDialogResponse.Error.Content);
+    }
 }
-Console.WriteLine(response.StatusCode);

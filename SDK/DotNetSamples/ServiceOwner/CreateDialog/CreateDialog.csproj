@@ -5,12 +5,12 @@
         <TargetFramework>net10.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
-        <UserSecretsId>e14792e7-cdd4-454b-9ff7-ba889cc4eebb</UserSecretsId>
+        <UserSecretsId>fe80d871-23e1-47fd-a85b-7417513978c7</UserSecretsId>
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="Altinn.ApiClients.Dialogporten.ServiceOwner" Version="1.120.1-alpha.1788463247" />
-      <PackageReference Include="Microsoft.Extensions.Hosting" Version="10.0.11" />
+      <PackageReference Include="Altinn.ApiClients.Dialogporten.ServiceOwner" Version="1.125.0-alpha.1793351325" />
+      <PackageReference Include="Microsoft.Extensions.Hosting" Version="10.0.14" />
     </ItemGroup>
 
 </Project>

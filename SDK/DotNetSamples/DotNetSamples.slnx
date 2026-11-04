@@ -7,8 +7,8 @@
     <Folder Name="/ServiceOwner/">
         <Project Path="ServiceOwner/AltinnEvents/AltinnEvents.csproj"/>
         <Project Path="ServiceOwner/DialogTokenValidation/DialogTokenValidation.csproj"/>
-        <Project Path="ServiceOwner/UpdateDialogSample/UpdateDialogSample.csproj"/>
-        <Project Path="ServiceOwner/DeleteDialogSample/DeleteDialogSample.csproj"/>
-        <Project Path="ServiceOwner/CreateDialogSample/CreateDialogSample.csproj"/>
+        <Project Path="ServiceOwner/UpdateDialog/UpdateDialog.csproj"/>
+        <Project Path="ServiceOwner/DeleteDialog/DeleteDialog.csproj"/>
+        <Project Path="ServiceOwner/CreateDialog/CreateDialog.csproj"/>
     </Folder>
 </Solution>
